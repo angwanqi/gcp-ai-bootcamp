@@ -9,6 +9,11 @@ variable "region" {
   description = "The region for the Google Cloud project resources"
 }
 
+variable "resource_prefix" {
+  type        = string
+  description = "The default ID for shared resources"
+}
+
 variable "services" {
   description = "Services to be enabled for the project"
   type        = set(string)
@@ -100,4 +105,14 @@ variable "firewall_rules" {
   type        = any
   description = "List of firewall rules"
   default     = []
+}
+
+
+# Lab specific variables
+
+# AlloyDB
+variable "alloydb_psa_subnet_ip" {
+  type        = string
+  description = "AlloyDB private service access subnet base IP address"
+  default     = "10.16.1.0"
 }

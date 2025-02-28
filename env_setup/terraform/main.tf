@@ -1,20 +1,8 @@
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-    }
-  }
-}
-
 resource "random_shuffle" "region" {
   input        = ["us-central1", "europe-west4", "asia-southeast1"]
   result_count = 1
 }
 
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
 
 module "tenant" {
   source = "./modules/tenant"
@@ -23,6 +11,8 @@ module "tenant" {
   project_id   = var.project_id
   region       = var.region
 
+  resource_prefix = var.resource_prefix
+  
   services = [
     "iam.googleapis.com",
     "compute.googleapis.com",

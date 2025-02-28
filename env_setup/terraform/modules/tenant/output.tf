@@ -7,3 +7,7 @@ output "vpc_id" {
   value       = module.vpc.network_id
   description = "VPC network id"
 }
+
+# lab specific outputs
+
+# alloydb lab

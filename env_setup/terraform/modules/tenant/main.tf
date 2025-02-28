@@ -15,6 +15,22 @@ data "google_netblock_ip_ranges" "iap_forwarders" {
   range_type = "iap-forwarders"
 }
 
+# enable APIs
+resource "google_project_service" "services" {
+  for_each = var.services
+  service  = each.value
+
+  project = var.project_id
+
+  timeouts {
+    create = "30m"
+    update = "40m"
+  }
+
+  disable_dependent_services = true
+  disable_on_destroy         = false
+}
+
 # create dedicated VPC for project
 module "vpc" {
   source = "terraform-google-modules/network/google"
