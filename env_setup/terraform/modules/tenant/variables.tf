@@ -14,6 +14,12 @@ variable "resource_prefix" {
   description = "The default ID for shared resources"
 }
 
+variable "project_users" {
+  type        = set(string)
+  description = "A set of usernames to be granted the project roles"
+  default     = [] # Set an empty set as default
+}
+
 variable "services" {
   description = "Services to be enabled for the project"
   type        = set(string)
@@ -111,8 +117,19 @@ variable "firewall_rules" {
 # Lab specific variables
 
 # AlloyDB
-variable "alloydb_psa_subnet_ip" {
+variable "alloydb_psa_subnet" {
   type        = string
   description = "AlloyDB private service access subnet base IP address"
-  default     = "10.16.1.0"
+  default     = "10.7.128.0/20"
+}
+
+variable "alloydb_initial_user" {
+  type        = string
+  description = "AlloyDB initial user"
+  default     = "postgres"
+}
+
+variable "alloydb_initial_password" {
+  type        = string
+  description = "AlloyDB initial password"
 }
