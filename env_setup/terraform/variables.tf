@@ -14,3 +14,21 @@ variable "resource_prefix" {
   description = "The default ID for shared resources"
   default     = "ai-takeoff"
 }
+
+variable "project_users" {
+  type        = set(string)
+  description = "A set of usernames to be granted the project roles"
+  default     = [] # Set an empty set as default
+}
+
+# lab specific variables
+variable "alloydb_initial_user" {
+  type        = string
+  description = "AlloyDB initial user"
+  default     = "alloydbadmin"
+}
+
+variable "alloydb_initial_password" {
+  type        = string
+  description = "AlloyDB initial password"
+}

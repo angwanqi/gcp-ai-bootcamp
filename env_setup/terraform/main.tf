@@ -11,8 +11,9 @@ module "tenant" {
   project_id   = var.project_id
   region       = var.region
 
+  project_users   = var.project_users
   resource_prefix = var.resource_prefix
-  
+
   services = [
     "iam.googleapis.com",
     "compute.googleapis.com",
@@ -34,23 +35,38 @@ module "tenant" {
 
   subnets = [
     {
-      subnet_name           = "sg-subnet"
+      subnet_name           = "asia-southeast1"
       subnet_ip             = "10.10.0.0/16"
       subnet_region         = "asia-southeast1"
       subnet_private_access = "true"
     },
     {
-      subnet_name           = "eu-subnet"
+      subnet_name           = "europe-west4"
       subnet_ip             = "10.11.0.0/16"
       subnet_region         = "europe-west4"
       subnet_private_access = "true"
     },
     {
-      subnet_name           = "us-subnet"
+      subnet_name           = "us-central1"
       subnet_ip             = "10.12.0.0/16"
       subnet_region         = "us-central1"
       subnet_private_access = "true"
     },
   ]
+
+  # lab specific variables ##################################################################
+
+  # alloydb lab
+  alloydb_initial_user     = var.alloydb_initial_user
+  alloydb_initial_password = var.alloydb_initial_password
 }
 
+module "bigquery_lab" {
+  source = "./modules/bqlab"
+
+  project_id = var.project_id
+  region     = var.region
+
+  project_users   = var.project_users
+  resource_prefix = var.resource_prefix
+}

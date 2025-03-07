@@ -15,6 +15,11 @@ data "google_netblock_ip_ranges" "iap_forwarders" {
   range_type = "iap-forwarders"
 }
 
+resource "random_shuffle" "zone" {
+  input        = ["a", "b", "c"]
+  result_count = 3
+}
+
 # enable APIs
 resource "google_project_service" "services" {
   for_each = var.services
@@ -93,4 +98,38 @@ resource "google_compute_router_nat" "nat" {
   }
 
   depends_on = [google_compute_router.router]
+}
+
+# create vertex AI workbench instance
+resource "google_workbench_instance" "default" {
+  count = 3
+
+  name     = "${var.resource_prefix}-workbench-${count.index}"
+  location = "${var.region}-${random_shuffle.zone.result[count.index]}"
+  project  = var.project_id
+
+  gce_setup {
+    machine_type      = "e2-standard-8"
+    disable_public_ip = true
+
+    boot_disk {
+      disk_size_gb = "150"
+      disk_type    = "PD_BALANCED"
+    }
+    data_disks {
+      disk_size_gb = "100"
+      disk_type    = "PD_BALANCED"
+    }
+
+    shielded_instance_config {
+      enable_secure_boot = true
+      enable_integrity_monitoring = true
+      enable_vtpm = true
+    }
+
+    network_interfaces {
+      network = module.vpc.network_id
+      subnet  = "projects/${var.project_id}/regions/${var.region}/subnetworks/${var.region}"
+    }
+  }
 }
