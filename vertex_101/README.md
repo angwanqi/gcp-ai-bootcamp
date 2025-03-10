@@ -87,9 +87,9 @@ Please make sure that you have selected a Google Cloud project as shown below:
         --member="serviceAccount:service-${PROJECT_NUM}@gcp-sa-aiplatform.iam.gserviceaccount.com"\
         --role='roles/storage.objectAdmin'   
   
-  gcloud compute networks create fraud-finder-network --enable-ula-internal-ipv6 --subnet-mode=custom
-  gcloud compute networks subnets create us-central1 --network=fraud-finder-network --range=10.0.0.0/24 --region=${REGION}
-  gcloud compute firewall-rules create fraud-finder-fw-rule --network=fraud-finder-network --allow=tcp:22,tcp:3389,udp,icmp,sctp
+  gcloud compute networks create ai-takeoff-vpc --enable-ula-internal-ipv6 --subnet-mode=custom
+  gcloud compute networks subnets create us-central1 --network=ai-takeoff-vpc --range=10.0.0.0/24 --region=${REGION}
+  gcloud compute firewall-rules create fraud-finder-fw-rule --network=ai-takeoff-vpc --allow=tcp:22,tcp:3389,udp,icmp,sctp
   ```
 
 - Override parent's policy: `constraints/compute.vmExternalIpAccess`
