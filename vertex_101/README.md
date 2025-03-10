@@ -132,3 +132,33 @@ Please make sure that you have selected a Google Cloud project as shown below:
   ![image](./misc/images/open-notebook-00.png)
 
 - Follow the instructions in the notebook, and continue through the remaining notebooks. 
+
+ #### Step 7: Create your virtual env kernel (Optional)
+ To choose your own Python version, e.g. 3.11, you can create your custom kernel.
+
+ - Install pyenv
+ ```shell
+ curl -fsSL https://pyenv.run | bash
+ echo "export PYENV_ROOT=\"\$HOME/.pyenv\"" >> ~/.bashrc
+ echo "[[ -d \$PYENV_ROOT/bin ]] && export PATH=\"\$PYENV_ROOT/bin:\$PATH\"" >> ~/.bashrc
+ echo "eval \"\$(pyenv init - bash)\"" >> ~/.bashrc
+ sudo apt install libssl-dev libffi-dev libncurses-dev libbz2-dev libreadline-dev libsqlite3-dev lzma liblzma-dev
+ ```
+
+- Restart the shell and install new python version (we put 3.11.10 and this may affect some package versions if you choose otherwise)
+```shell
+exec $SHELL
+pyenv install 3.11.10
+```
+
+- Create the virtual env and the custom kernel
+```shell
+.pyenv/versions/3.11.10/bin/python -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install ipykernel
+python -m ipykernel install --name vertex-ai --user
+```
+
+- Once done, you can open the jupyter notebook and select the custom kernel `vertex-ai`
+  ![image](./misc/images/custom-notebook-kernel.png)
