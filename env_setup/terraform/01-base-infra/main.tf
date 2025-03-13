@@ -1,8 +1,13 @@
+
 resource "random_shuffle" "region" {
   input        = ["us-central1", "europe-west4", "asia-southeast1"]
   result_count = 1
 }
 
+resource "random_shuffle" "zone" {
+  input        = ["a", "b", "c"]
+  result_count = 3
+}
 
 module "tenant" {
   source = "./modules/tenant"
@@ -59,14 +64,4 @@ module "tenant" {
   # alloydb lab
   alloydb_initial_user     = var.alloydb_initial_user
   alloydb_initial_password = var.alloydb_initial_password
-}
-
-module "bigquery_lab" {
-  source = "./modules/bqlab"
-
-  project_id = var.project_id
-  region     = var.region
-
-  project_users   = var.project_users
-  resource_prefix = var.resource_prefix
 }
