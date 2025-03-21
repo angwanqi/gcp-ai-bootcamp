@@ -58,10 +58,4 @@ module "tenant" {
       subnet_private_access = "true"
     },
   ]
-
-  # lab specific variables ##################################################################
-
-  # alloydb lab
-  alloydb_initial_user     = var.alloydb_initial_user
-  alloydb_initial_password = var.alloydb_initial_password
 }

@@ -8,6 +8,16 @@ output "vpc_id" {
   description = "VPC network id"
 }
 
+output "vpc_network_name" {
+  value       = module.tenant.vpc_network_name
+  description = "VPC network name"
+}
+
+output "vpc_subnet_ips" {
+  value       = module.tenant.vpc_subnet_ips
+  description = "VPC subnet ips"
+}
+
 output "project_users" {
   value       = var.project_users
   description = "list of project users"
