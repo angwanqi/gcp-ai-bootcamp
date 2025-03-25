@@ -1,13 +1,14 @@
 # 2025 AI Cloud Take Off Program
+Last updated: 25 March 2025
 
 ## Labs
 | Lab Name | Status |
 | --- | --- |
-| [Introduction to Generative AI](intro_to_genai)  | Not started |
-| [LLM Tuning](llm_tuning) | Not started |
-| [Retrieval Augmented Generation](rag) | Not started |
-| [Data Analytics Platform](data) | Not started |
-| [Vertex AI Platform 101](vertex_101) | Not started |
-| [Generative AI Agents](vertex-agent) | Not started |
-| [AI with AlloyDB](alloydb) | Not started |
+| [Introduction to Generative AI](intro_to_genai)  | Completed - Need final test |
+| [LLM Tuning](llm_tuning) | In Progress |
+| [Agentic Retrieval Augmented Generation](rag) | In Progress |
+| [Data Analytics Platform](data) | To be tested |
+| [Vertex AI Platform 101](vertex_101) | In Progress |
+| [Generative AI Agents](vertex-agent) | In Progress |
+| [AI with AlloyDB](alloydb) | In Progress |
 
