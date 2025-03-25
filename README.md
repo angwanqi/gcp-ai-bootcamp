@@ -7,7 +7,7 @@ Last updated: 25 March 2025
 | [Introduction to Generative AI](intro_to_genai)  | Completed - Need final test |
 | [LLM Tuning](llm_tuning) | In Progress |
 | [Agentic Retrieval Augmented Generation](rag) | In Progress |
-| [Data Analytics Platform](data) | To be tested |
+| [Data Analytics Platform](data) | Completed - Need final test |
 | [Vertex AI Platform 101](vertex_101) | In Progress |
 | [Generative AI Agents](vertex-agent) | In Progress |
 | [AI with AlloyDB](alloydb) | In Progress |
