@@ -1,4 +1,6 @@
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
+
+import yaml
 from google.cloud import storage
 from pydantic import BaseModel, Field
 
@@ -9,10 +11,20 @@ def gcs_read(project_id: str, bucket: str, blob_name: str) -> storage.Blob:
     return bucket.blob(blob_name)
 
 
+def read_from_bucket(bucket_name: str, uri: str, deserialize: bool = True) -> Any:
+    client = storage.Client()
+    bucket = client.bucket(bucket_name=bucket_name)
+    blob = bucket.blob(uri)
+    content = blob.download_as_string()
+    if deserialize:
+        content = yaml.safe_load(content)
+    return content
+
+
 class VertexConfig(BaseModel):
     PROJECT_ID: str
-    STAGING_BUCKET: str
     BUCKET_NAME: str
+    STAGING_BUCKET: str
     REGION: str
     ID: str
     FEATURESTORE_ID: str

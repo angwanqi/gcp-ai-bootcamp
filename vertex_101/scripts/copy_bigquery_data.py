@@ -113,7 +113,7 @@ def get_batch_data_gcs(BUCKET_NAME):
 
     return "Done get_batch_data_gcs"
 
-def get_batch_data_bq(PROJECT):
+def get_batch_data_bq(PROJECT, region):
 
     '''
     Creates the following tables in your project by copying from public tables:
@@ -128,11 +128,8 @@ def get_batch_data_bq(PROJECT):
     |-`customersterminals` (table: profiles of customers and terminals within their radius)
     '''
     
-    run_bq_query(f"CREATE SCHEMA IF NOT EXISTS `{PROJECT}`.tx OPTIONS(location='us-central1');")
-    run_bq_query(f"CREATE SCHEMA IF NOT EXISTS `{PROJECT}`.demographics OPTIONS(location='us-central1');")
-    
-    #run_bq_query("CREATE SCHEMA IF NOT EXISTS `%s`.tx OPTIONS(location='%s');" % (PROJECT, 'us-central1'))
-    #run_bq_query("CREATE SCHEMA IF NOT EXISTS `%s`.demographics OPTIONS(location='%s');" % (PROJECT, 'us-central1'))
+    run_bq_query(f"CREATE SCHEMA IF NOT EXISTS `{PROJECT}`.tx OPTIONS(location='{region}');")
+    run_bq_query(f"CREATE SCHEMA IF NOT EXISTS `{PROJECT}`.demographics OPTIONS(location='{region}');")
     
     run_bq_query(f"""
     CREATE OR REPLACE TABLE `{PROJECT}`.tx.tx 
@@ -205,7 +202,10 @@ if __name__ == "__main__":
     #print(REGION)
     #get_batch_data_gcs(BUCKET_NAME, REGION)
     #get_batch_data_bq(PROJECT)
-    PROJECT = get_project_id()
+    # PROJECT = get_project_id()
     BUCKET_NAME = sys.argv[1]
+    REGION = sys.argv[2]
+    PROJECT = sys.argv[3]
+    print(BUCKET_NAME, REGION, PROJECT)
     get_batch_data_gcs(BUCKET_NAME)
-    get_batch_data_bq(PROJECT)
+    get_batch_data_bq(PROJECT, REGION)
