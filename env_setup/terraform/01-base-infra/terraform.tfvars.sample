@@ -1,0 +1,8 @@
+# Set the project id
+project_id = "<PROJECT_ID>"
+
+# Users to be granted access to the project
+project_users = ["user1@example.com", "user2@example.com", "user3@example.com"]
+
+# Default region
+region = "<DEFAULT_REGION : eg. asia-southeast1>"
