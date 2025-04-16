@@ -28,10 +28,7 @@ As part of this lab, you will:
 
 The following diagram represents the flow of data and steps involved in the implementation.
 
-<figure>
-  <img src="./images/1_architecture.png" alt="Alt text">
-  <figcaption>High level diagram representing the flow of the Patent Search Application with AlloyDB</figcaption>
-</figure>
+![Architecture of lab flow](./images/alloydb_vertex.png)
 
 ## Task 1. Configure an AlloyDB database to support vector search
 
@@ -96,7 +93,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 ```
 
 ## Task 2. Create a new table and load patents data
-The (Google Patents Public Data)[https://pantheon.corp.google.com/marketplace/product/google_patents_public_datasets/google-patents-public-data?project=cloud-training-demos] is a large dataset of patent publications that provides the full abstract of each patent and is a great candidate for vector search due to the often lengthy and complex text in these abstracts.
+The [Google Patents Public Data](https://cloud.console.google.com/marketplace/product/google_patents_public_datasets/google-patents-public-data) is a large dataset of patent publications that provides the full abstract of each patent and is a great candidate for vector search due to the often lengthy and complex text in these abstracts.
 
 In this task, you create a new table containing the various columns in the patent source data plus an extra column for the vector embeddings for the abstract text (to be generated in the next task). Last, you load a sample of the full patent data into the table in AlloyDB.
 
