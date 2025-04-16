@@ -1,14 +1,40 @@
-# 2025 AI Cloud Take Off Program
-Last updated: 25 March 2025
+# ☁️👨‍💻 Google Cloud Platform Hands-on Lab
 
-## Labs
+Welcome to the Google Cloud Hands-on Lab repository! This collection of labs cover multiple topic areas such as Generative AI, AI, Data Analytics and Data Management, designed to give you hands-on experiences with the platform so that you can quickly get started on GCP. 
+
+## 🚀 Getting Started
+To get started, clone this repository to your machine (e.g. Vertex Workbench). 
+```bash
+    git clone https://github.com/google/adk-samples.git](https://github.com/angwanqi/cloud-ai-takeoff.git
+    cd cloud-ai-takeoff
+ ```
+## 🔧 Status of the Labs
 | Lab Name | Status |
 | --- | --- |
-| [Introduction to Generative AI](intro_to_genai)  | Completed - Need final test |
-| [LLM Tuning](llm_tuning) | In Progress |
-| [Agentic Retrieval Augmented Generation](rag) | In Progress |
-| [Data Analytics Platform](data) | Completed - Need final test |
-| [Vertex AI Platform 101](vertex_101) | In Progress |
-| [Generative AI Agents](vertex-agent) | In Progress |
-| [AI with AlloyDB](alloydb) | In Progress |
+| [Introduction to Generative AI](intro_to_genai)  | 🚧 In progress |
+| [LLM Tuning](llm_tuning) | 🚧 In progress |
+| [Agentic Retrieval Augmented Generation](rag) | 🚧 In progress |
+| [Data Analytics Platform](data) | ⏸️ To test |
+| [Vertex AI Platform 101](vertex_101) | 🚧 In progress |
+| [Conversational Agents - Low Code](vertex-agent) | 🚧 In progress |
+| [AI with AlloyDB](alloydb) | ⏸️ To test |
 
+## 🧱 Repository Structure
+```bash
+.
+├── README.md
+├── alloydb
+│   └── vector_search_with_alloydb.md
+├── data_bq
+│   ├── bq
+│   └── bqml
+├── intro_to_genai
+├── llm_tuning
+├── rag
+├── requirements.txt
+├── vertex-agent
+└── vertex_101
+```
+
+## Disclaimers
+This is not an officially supported Google product. This project is intended for demonstration purposes only.
