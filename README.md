@@ -5,7 +5,7 @@ Welcome to the Google Cloud Hands-on Lab repository! This collection of labs cov
 ## 🚀 Getting Started
 To get started, clone this repository to your machine (e.g. Vertex Workbench). 
 ```bash
-    git clone https://github.com/google/adk-samples.git](https://github.com/angwanqi/cloud-ai-takeoff.git
+    git clone https://github.com/angwanqi/cloud-ai-takeoff.git
     cd cloud-ai-takeoff
  ```
 ## 🔧 Status of the Labs
