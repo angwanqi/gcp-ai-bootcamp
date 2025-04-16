@@ -1,3 +1,4 @@
+import io
 from typing import List, Dict, Optional, Any
 
 import yaml
@@ -9,6 +10,13 @@ def gcs_read(project_id: str, bucket: str, blob_name: str) -> storage.Blob:
     client = storage.Client(project=project_id)
     bucket = client.bucket(bucket_name=bucket)
     return bucket.blob(blob_name)
+
+
+def gcs_write(project_id: str, bucket: str, blob_name: str, content: io.StringIO | io.BytesIO) -> None:
+    client = storage.Client(project=project_id)
+    bucket = client.bucket(bucket_name=bucket)
+    blob = bucket.blob(blob_name)
+    blob.upload_from_file(content, rewind=True)
 
 
 def read_from_bucket(bucket_name: str, uri: str, deserialize: bool = True) -> Any:
@@ -63,7 +71,7 @@ class VertexConfig(BaseModel):
     IMAGE_URI: str
     TRAIN_COMPUTE: str = Field(default="e2-standard-4")
     DEPLOY_COMPUTE: str = Field(default="n1-standard-4")
-    BASE_IMAGE: str = Field(default="python:3.10")
+    BASE_IMAGE: str = Field(default="python:3.11")
     PIPELINE_NAME: str
     PIPELINE_ROOT: str
     BQ_DATASET: str = Field(default="tx")
