@@ -12,7 +12,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | Lab Name | Status |
 | --- | --- |
 | [Introduction to Generative AI](intro_to_genai)  | 🚧 In progress |
-| [Conversational Agents - Low Code](vertex-agent) | 🚧 In progress |
+| [Conversational Agents - Low Code](vertex-agent) | ✅ Completed |
 | [LLM Tuning](llm_tuning) | 🚧 In progress |
 | [Data Analytics Platform](data) | ⏸️ To test |
 | [AI with AlloyDB](alloydb) | ⏸️ To test |
