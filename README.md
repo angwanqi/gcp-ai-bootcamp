@@ -12,12 +12,14 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | Lab Name | Status |
 | --- | --- |
 | [Introduction to Generative AI](intro_to_genai)  | 🚧 In progress |
-| [LLM Tuning](llm_tuning) | 🚧 In progress |
-| [Agentic Retrieval Augmented Generation](rag) | 🚧 In progress |
-| [Data Analytics Platform](data) | ⏸️ To test |
-| [Vertex AI Platform 101](vertex_101) | 🚧 In progress |
 | [Conversational Agents - Low Code](vertex-agent) | 🚧 In progress |
+| [LLM Tuning](llm_tuning) | 🚧 In progress |
+| [Data Analytics Platform](data) | ⏸️ To test |
 | [AI with AlloyDB](alloydb) | ⏸️ To test |
+| [Multi Agent Systems with ADK](rag) | 🚧 In progress |
+| AI Application on Cloud Run | 🚧 In progress |
+| [Vertex AI Platform 101](vertex_101) | 🚧 In progress |
+
 
 ## 🧱 Repository Structure
 ```bash
