@@ -15,16 +15,16 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | [Conversational Agents - Low Code](convo-agent) | ✅ Completed |
 | [LLM Tuning](llm-tuning) | 🚧 To be updated |
 | [Data Analytics Platform](data-analytics) | ✅ Completed |
-| [AI with AlloyDB](alloydb) | ✅ Completed |
-| [Multi Agent Systems with ADK](rag) | 🚧 In progress |
+| [AI with AlloyDB](alloydb-ai) | ✅ Completed |
+| [Multi Agent Systems with ADK](agents) | 🚧 In progress |
 | AI Application on Cloud Run | 🚧 To be updated |
-| [Vertex AI Platform 101](vertex_101) | 🚧 In progress |
+| [Vertex AI Platform 101](vertex-101) | 🚧 In progress |
 
 ## 🤖 List of the Labs
 1. Introduction to Generative AI
     - *To be added*
 2. Low-code Agents
-    - [Building a Travel Agent with Conversational Agents](convo-agent/travel_agent.md)
+    - [Building a Travel Agent with Conversational Agents](convo-agent/travel_convo_agent.md)
 3. LLM Tuning
     - [Gemini Tuning (via Console)](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#console)
     - [Gemma 3 Tuning](llm-tuning/gemma3_finetuning_on_vertex.ipynb)
