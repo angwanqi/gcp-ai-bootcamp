@@ -27,7 +27,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
     - [Building a Travel Agent with Conversational Agents](convo-agent/travel_convo_agent.md)
 3. LLM Tuning
     - [Gemini Tuning (via Console)](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#console)
-    - [Gemma 3 Tuning](llm-tuning/gemma3_finetuning_on_vertex.ipynb)
+    - Gemma 3 Tuning ([via Console](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemma3) or [notebook](llm-tuning/gemma3_finetuning_on_vertex.ipynb))
     - [OSS Model (Llama 3) Tuning](llm-tuning/llama3_finetuning_on_vertex.ipynb)
 4. Data Analytics Platform
     - [Predict Visitor Purchases with BigQuery Machine Learning](data-analytics/bigquery-ml)
