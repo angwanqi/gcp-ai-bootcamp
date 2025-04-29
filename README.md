@@ -22,6 +22,8 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 
 ## 🤖 List of the Labs
 1. Introduction to Generative AI
+    - Gemini 2.0 Family - Multimodal Prompting
+    - Imagen 3 - Image Generation
     - *To be added*
 2. Low-code Agents
     - [Building a Travel Agent with Conversational Agents](convo-agent/travel_convo_agent.md)
