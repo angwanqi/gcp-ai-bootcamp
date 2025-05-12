@@ -153,5 +153,14 @@ source .venv/bin/activate
 python -m ipykernel install --user --name=vertex-user
 ```
 
+- Allow hidden file access from jupyter
+```
+echo "c.ContentsManager.allow_hidden = True" >> /home/jupyter/.jupyter/jupyter_notebook_config.py
+sudo service jupyter restart
+
+# check status
+sudo service jupyter status
+```
+
 - Once done, you can open the jupyter notebook and select the custom kernel `vertex-ai`
   ![image](./misc/images/custom-notebook-kernel.png)
