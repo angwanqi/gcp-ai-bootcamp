@@ -117,7 +117,7 @@ Please make sure that you have selected a Google Cloud project as shown below:
 
 - Run the following code to clone this repo:
   ```
-  git clone https://github.com/GoogleCloudPlatform/fraudfinder.git
+  git clone https://github.com/angwanqi/cloud-ai-takeoff.git
   ```
 
 - You can also navigate to the menu on the top left of the Jupyter Lab environment and click on **Git > Clone a repository**.
@@ -138,7 +138,7 @@ Please make sure that you have selected a Google Cloud project as shown below:
 
  - Install uv
  ```shell
- curl -LsSf https://astral.sh/uv/install.sh | sh 
+ curl -LsSf https://astral.sh/uv/install.sh | sh
  ```
 
 - Restart the shell and install new python version (we put 3.11.10 and this may affect some package versions if you choose otherwise)
@@ -149,6 +149,8 @@ uv python install 3.12
 - Create the virtual env and the custom kernel
 ```shell
 uv sync
+source .venv/bin/activate
+python -m ipykernel install --user --name=vertex-user
 ```
 
 - Once done, you can open the jupyter notebook and select the custom kernel `vertex-ai`
