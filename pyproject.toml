@@ -1,0 +1,32 @@
+[project]
+name = "ai-takeoff-2025"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bigframes>=2.3.0",
+    "cloudpickle>=3.1.1",
+    "dask[dataframe]>=2025.4.1",
+    "google-cloud-aiplatform>=1.92.0",
+    "google-cloud-artifact-registry>=1.16.0",
+    "google-cloud-bigquery>=3.31.0",
+    "google-cloud-bigquery-storage>=2.31.0",
+    "google-cloud-bigtable>=2.30.1",
+    "google-cloud-pipeline-components>=2.20.0",
+    "google-cloud-storage==2.18.2",
+    "kfp>=2.13.0",
+    "nbformat>=5.10.4",
+    "plotly>=6.0.1",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.3",
+    "scikit-learn>=1.6.1",
+    "seaborn>=0.13.2",
+    "tqdm>=4.67.1",
+    "xgboost>=3.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+]
