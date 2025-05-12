@@ -8,7 +8,7 @@ dependencies = [
     "bigframes>=2.3.0",
     "cloudpickle>=3.1.1",
     "dask[dataframe]>=2025.4.1",
-    "google-cloud-aiplatform>=1.92.0",
+    "google-cloud-aiplatform==1.86.0",
     "google-cloud-artifact-registry>=1.16.0",
     "google-cloud-bigquery>=3.31.0",
     "google-cloud-bigquery-storage>=2.31.0",
