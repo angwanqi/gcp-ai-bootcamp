@@ -17,7 +17,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | [Data Analytics Platform](data-analytics) | ✅ Completed |
 | [AI with AlloyDB](alloydb-ai) | ✅ Completed |
 | [Multi Agent Systems with ADK](agents) | 🚧 In progress |
-| AI Application on Cloud Run | 🚧 To be updated |
+| [AI Application on Cloud Run](cloudrun) | 🚧 In progress |
 | [Vertex AI Platform 101](vertex-101) | 🚧 In progress |
 
 ## 🤖 List of the Labs
@@ -39,7 +39,8 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 6. Multi Agent Systems with ADK
     - *To be added*
 7. AI Application on Cloud Run
-    - *To be added*
+    - [Serving Gemma 3 with vLLM on Cloud Run](cloudrun/deploy_vllm_cloudrun.md)
+    - Serving Gemma 3 Locally
 8. Vertex AI Platform 101
     - [End to end training on Vertex platform](vertex-101)
 
