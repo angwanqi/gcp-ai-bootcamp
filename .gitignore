@@ -186,3 +186,6 @@ argolis*
 *.tfstate
 *.tfstate.*
 .terraform*
+
+# any config file
+**/conf*.json
