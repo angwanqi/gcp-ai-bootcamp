@@ -12,7 +12,7 @@ This repo is organized across various notebooks as:
 * [01_exploratory_data_analysis.ipynb](01_exploratory_data_analysis.ipynb)
 * [02_feature_engineering_batch.ipynb](02_feature_engineering_batch.ipynb)
 * [03_feature_engineering_streaming.ipynb](03_feature_engineering_streaming.ipynb)
-* [vertex_ai/](vertex_ai/)
+* [vertex_ai_lab/](vertex_ai_lab/)
   * [04_experimentation.ipynb](bqml/04_experimentation.ipynb)
   * [05_model_training_xgboost_formalization.ipynb](bqml/05_model_training_xgboost_formalization.ipynb)
   * [06_formalization.ipynb](bqml/06_formalization.ipynb)
