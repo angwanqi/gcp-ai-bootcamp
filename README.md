@@ -13,12 +13,12 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | --- | --- |
 | [Introduction to Generative AI](intro-to-genai)  | 🚧 To be updated |
 | [Conversational Agents - Low Code](convo-agent) | ✅ Completed |
-| [LLM Tuning](llm-tuning) | 🚧 To be updated |
+| [LLM Tuning](llm-tuning) | ✅ Completed |
 | [Data Analytics Platform](data-analytics) | ✅ Completed |
 | [AI with AlloyDB](alloydb-ai) | ✅ Completed |
 | [Multi Agent Systems with ADK](agents) | 🚧 In progress |
 | [AI Application on Cloud Run](cloudrun) | 🚧 In progress |
-| [Vertex AI Platform 101](vertex-101) | 🚧 In progress |
+| [Vertex AI Platform 101](vertex-101) | ✅ Completed |
 
 ## 🤖 List of the Labs
 1. Introduction to Generative AI
