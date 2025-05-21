@@ -31,7 +31,7 @@ https://conversational-agents.cloud.google.com/projects/<PROJECT_ID>/prebuilt
 - Scroll down to **Schema**
 - Under Server URL, replace the URL with:
 ```bash
-https://travel-places-search-951134149941.us-central1.run.app
+https://travel-places-search-288715243473.us-central1.run.app
 ```
 - Once done, click **Save**
 ![Replace URL](./images/replace_server_url.png)
