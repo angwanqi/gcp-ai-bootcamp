@@ -11,7 +11,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 ## 🔧 Status of the Labs
 | Lab Name | Status |
 | --- | --- |
-| [Introduction to Generative AI](intro-to-genai)  | 🚧 To be updated |
+| [Introduction to Generative AI](intro-to-genai)  | ✅ Completed |
 | [Conversational Agents - Low Code](convo-agent) | ✅ Completed |
 | [LLM Tuning](llm-tuning) | ✅ Completed |
 | [Data Analytics Platform](data-analytics) | ✅ Completed |
@@ -22,14 +22,14 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 
 ## 🤖 List of the Labs
 1. Introduction to Generative AI
-    - Gemini 2.0 Family - Multimodal Prompting
-    - Imagen 3 - Image Generation
-    - *To be added*
+    - [Gemini - Multimodal Prompting](intro-to-genai/intro_gemini_2_0_flash.ipynb)
+    - [Open Source Models - Stable Diffusion](intro-to-genai/model_garden_sdxl.ipynb)
+    - [Imagen 3 - Image Generation](intro-to-genai/Imagen%20Console%20Lab.pdf)
 2. Low-code Agents
     - [Building a Travel Agent with Conversational Agents](convo-agent/travel_convo_agent.md)
 3. LLM Tuning
     - [Gemini Tuning (via Console)](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#console)
-    - Gemma 3 Tuning ([via Console](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemma3) or [notebook](llm-tuning/gemma3_finetuning_on_vertex.ipynb))
+    - [Gemma 3 Tuning (via notebook](llm-tuning/gemma3_finetuning_on_vertex.ipynb)
     - [OSS Model (Llama 3) Tuning](llm-tuning/llama3_finetuning_on_vertex.ipynb)
 4. Data Analytics Platform
     - [Predict Visitor Purchases with BigQuery Machine Learning](data-analytics/bigquery-ml)
