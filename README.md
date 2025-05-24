@@ -28,8 +28,8 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 2. Low-code Agents
     - [Building a Travel Agent with Conversational Agents](convo-agent/travel_convo_agent.md)
 3. LLM Tuning
-    - [Gemini Tuning (via Console)](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#console)
-    - [Gemma 3 Tuning (via notebook](llm-tuning/gemma3_finetuning_on_vertex.ipynb)
+    - Gemini Tuning ([via Console](https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#console)) with this [sample dataset](https://cloud.google.com/vertex-ai/generative-ai/docs/models/tune_gemini/text_tune#sample-datasets)
+    - Gemma 3 Tuning ([via notebook](llm-tuning/gemma3_finetuning_on_vertex.ipynb))
     - [OSS Model (Llama 3) Tuning](llm-tuning/llama3_finetuning_on_vertex.ipynb)
 4. Data Analytics Platform
     - [Predict Visitor Purchases with BigQuery Machine Learning](data-analytics/bigquery-ml)
@@ -48,15 +48,17 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 ## 🧱 Repository Structure
 ```bash
 .
-├── README.md
-├── agents
 ├── alloydb-ai
+├── cloudrun
 ├── convo-agent
 ├── data-analytics
 ├── intro-to-genai
 ├── llm-tuning
+├── vertex-101
+├── README.md
+├── pyproject.toml
 ├── requirements.txt
-└── vertex-101
+└── uv.lock
 ```
 
 ## Disclaimers
