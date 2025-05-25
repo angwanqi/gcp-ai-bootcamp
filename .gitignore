@@ -189,3 +189,7 @@ argolis*
 
 # any config file
 **/conf*.json
+
+# custom training and KFP folders
+**/build_training/
+**/build_serving/
