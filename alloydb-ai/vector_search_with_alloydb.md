@@ -28,7 +28,7 @@ As part of this lab, you will:
 
 The following diagram represents the flow of data and steps involved in the implementation.
 
-![Architecture of lab flow](./images/alloydb_vertex.png)
+![Architecture of lab flow](./images/2_alloydb_vertex.png)
 
 ## Task 1. Configure an AlloyDB database to support vector search
 
@@ -38,8 +38,9 @@ The provisioning of an AlloyDB cluster named alloydb-cluster and an instance nam
 3. Click into the cluster.
 4. In the AlloyDB menu under **Primary Cluster**, click **AlloyDB Studio**
 4. Provide the following details to sign in, and click **Authenticate**.
-| Property | Value |
-| -------- | ------- |
+
+| Field | Value |
+|----------|-------|
 | Database | Select **postgres** |
 | User | Select **postgres** |
 | Password | Will be shared during the lab |
@@ -75,7 +76,7 @@ Now that the database has the appropriate extensions and permissions, you can co
 
 2. Click **Grant access**.
 
-3. For **New principals**, enter the AlloyDB service account ID: **<PROJECT_NUMBER>@gcp-sa-alloydb.iam.gserviceaccount.com**
+3. For **New principals**, enter the AlloyDB service account ID: **service-<PROJECT_NUMBER>@gcp-sa-alloydb.iam.gserviceaccount.com**
 
 4. For Select a role, select **Vertex AI User**.
 
@@ -211,9 +212,7 @@ In this query,
 
 Below is the result:
 
-<TODO: Insert image>
-
-As you can observe in your results, the matches are pretty close to the search text.
+![Similarity search result](./images/3_similarity_search_result.png)
 
 ## Congratulations
 Congratulations! You have successfully performed a similarity search using AlloyDB, pgvector and Vector search. By combining the capabilities of  [AlloyDB](https://cloud.google.com/alloydb/docs),  [Vertex AI](https://cloud.google.com/vertex-ai/docs/start/introduction-unified-platform), and  [Vector Search](https://cloud.google.com/alloydb/docs/ai/work-with-embeddings), we've taken a giant leap forward in making literature searches accessible, efficient, and truly meaning-driven.
