@@ -36,8 +36,8 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
     - [Analyzing Large Datasets in BigQuery](data-analytics/bigquery)
 5. AI with AlloyDB
     - [Vector Search with AlloyDB](alloydb-ai/vector_search_with_alloydb.md)
-6. Multi Agent Systems with ADK
-    - *To be added*
+6. Multi Agent Systems with Agent Development Kit (ADK)
+    - [ADK 101](https://github.com/analyticsrepo01/adk_training_002/blob/main/ADK_Training_main.ipynb) 
 7. AI Application on Cloud Run
     - [Working with Gemma 3 locally](https://github.com/iamthuya/google-cloud-workshops/blob/main/open-models/gemma/gemma3-4b-with-hugging-face.ipynb)
     - [Serving Gemma 3 with vLLM on Cloud Run](cloudrun/deploy_vllm_cloudrun.md)
