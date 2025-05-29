@@ -77,11 +77,11 @@ gcloud config set project <your-desired-project-id>
 
 ## **Enable necessary APIs**
 
-To use Google Cloud services like Cloud Run, you must first activate their respective APIs for your project. Running the commands below in the Cloud Shell terminal enables all the services that you will need for this Codelab:
+To use Google Cloud services like Cloud Run, you must first activate their respective APIs for your project. Running the commands below in the Cloud Shell terminal enables all the services that you will need for this lab:
 
 ```
 gcloud services enable run.googleapis.com 
-cloud services enable cloudbuild.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
 gcloud services enable secretmanager.googleapis.com
 gcloud services enable artifactregistry.googleapis.com
 ```
@@ -124,7 +124,8 @@ Here is the command to perform those steps:
 
 ```
 mkdir vllm-gemma3
-cd vllm-gemma3 touch .env
+cd vllm-gemma3
+touch .env
 ```
 
 | Note: If you are not comfortable with using command line tools like vim or nano, you can use the Cloud Code Editor by clicking on the Open Editor button.  |
@@ -134,7 +135,7 @@ Next, copy the variables listed below and paste them into the **.env file** you 
 
 ```
 PROJECT_ID=<your_project_id>
-REGION=<your_region>
+REGION=asia-southeast1
 
 MODEL_PROVIDER=google
 MODEL_VARIANT=gemma-3-1b-it
@@ -184,26 +185,6 @@ gcloud secrets versions access latest --secret=HF_TOKEN
 
 ---
 
-# Create a service account
-
-Duration: 5:00
-
-To enhance security and manage access effectively in a production setting, services should operate under dedicated service accounts that are strictly limited to the permissions necessary for their specific tasks.
-
-Run this command to create a service account
-
-```
-gcloud iam service-accounts create $SERVICE_ACC_NAME --display-name='Cloud Run vLLM Model Serving SA'
-```
-
-The following command attach the necessary permission
-
-```
-TO BE ADDED
-```
-
----
-
 # Create an Image on Artifact Registry
 
 Duration: 5:00
@@ -215,7 +196,7 @@ This step involves creating a Docker image that includes the model weights and a
 Let’s create a Docker repository in Artifact Registry for pushing your built images. Run the following command in the terminal:
 
 ```
-gcloud artifacts repositories create ${AR_REPO_NAME} \   --repository-format docker \   --location ${REGION}
+gcloud artifacts repositories create ${AR_REPO_NAME} --repository-format docker --location ${REGION}
 ```
 
 ## **Storing the model**
@@ -278,7 +259,6 @@ As the docker image is already pushed to the Artifact Registry, it can be deploy
 ```
 gcloud beta run deploy ${SERVICE_NAME} \
     --image=${IMAGE_NAME} \
-    --service-account ${SERVICE_ACC_EMAIL} \
     --cpu=8 \
     --memory=32Gi \
     --gpu=1 --gpu-type=nvidia-l4 \
@@ -288,6 +268,10 @@ gcloud beta run deploy ${SERVICE_NAME} \
     --no-cpu-throttling
 ```
 
+> [!NOTE]  
+> If you encounter an error that states **Deployment failed** with the following message, type **'Y'** to deploy with no zonal redundancy. 
+
+![Deploy with no zonal redundancy](./images/no_zonal_redundancy.jpeg)
 ---
 
 # Test the service
@@ -301,6 +285,9 @@ gcloud run services proxy ${SERVICE_NAME} --region ${REGION}
 ```
 
 In another terminal window, type this curl command in the terminal to test the connection
+
+> [!NOTE]  
+> Your first request might experience a delay of 5 minutes or more due to a cold start on Cloud Run, as it scales to zero instances when idle. For production environments, consider setting a minimum number of instances greater than zero to eliminate these cold starts.
 
 ```
 curl -X POST http://localhost:8080/v1/completions \
@@ -336,15 +323,3 @@ Congratulations for making it to the end of this Codelab. You just learned
 Now, feel free to explore deploying some other exciting models, like Llama, DeepSeek, or Qwen, whenever you're ready to dive deeper\!
 
 ---
-
-# Clean Up
-
-Duration: 1:00
-
-## **Delete the cloud run service**
-
-
-## **Delete the docker repository**
-
-
-## **Delete the service account**
