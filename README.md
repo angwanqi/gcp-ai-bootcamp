@@ -16,7 +16,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | [LLM Tuning](llm-tuning) | ✅ Completed |
 | [Data Analytics Platform](data-analytics) | ✅ Completed |
 | [AI with AlloyDB](alloydb-ai) | ✅ Completed |
-| [Multi Agent Systems with ADK](agents) | 🚧 In progress |
+| [Multi Agent Systems with ADK](agents) | ✅ Completed |
 | [AI Application on Cloud Run](cloudrun) | ✅ Completed |
 | [Vertex AI Platform 101](vertex-101) | ✅ Completed |
 
