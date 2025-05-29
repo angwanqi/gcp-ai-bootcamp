@@ -148,6 +148,7 @@ uv python install 3.12
 
 - Create the virtual env and the custom kernel
 ```shell
+cd cloud-ai-takeoff # go back to the home folder where pyproject.toml file locates
 uv sync
 source .venv/bin/activate
 python -m ipykernel install --user --name=vertex-user
