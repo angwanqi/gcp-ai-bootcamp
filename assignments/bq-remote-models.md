@@ -22,21 +22,22 @@ Usually, performing ML or artificial intelligence (AI) on large datasets require
 In this task, you will create a **Cloud Resource** connection, which enables BigQuery to access image files in Cloud Storage and make calls to Vertex AI.
 
 1. In the Google Cloud Console, open the navigation menu and click **BigQuery**.
-2. To create a connection, click **+ ADD**, and then click **Connections to external data sources**.
+2. To create a connection, click **+ Add data**, and then select **Vertex AI**.
 ![Add data](./images/add_data.png)
 
-3. In the **Connection type** list, select **Vertex AI remote models, remote functions and BigLake (Cloud Resource)**.
-4. In the **Connection ID** field, enter `gemini_conn` for your connection.
-5. For **Location** type, select **Multi-region** and then, from dropdown select **US multi-region**.
-6. Use the defaults for the other settings. 
+3. Select **Vertex AI models: BigQuery federation**
+4. In the **Connection type** list, select **Vertex AI remote models, remote functions and BigLake (Cloud Resource)**.
+5. In the **Connection ID** field, enter `gemini_conn` for your connection.
+6. For **Location** type, select **Multi-region** and then, from dropdown select **US multi-region**.
+7. Use the defaults for the other settings. 
 
 ![Connection settings](./images/connection_settings.png)
 
 7. Click **Create connection**.
-8. Click **GO TO CONNECTION**.
+8. A small pop-up should appear at bottom of page. Click **GO TO CONNECTION**.
 9. In the Connection info pane, copy the **service account ID** to a text file for use in the next task. You will also see that the connection is added under the **External Connections** section of your project in the BigQuery Explorer.
 
-## Task 2: Grant IAM permissions to the connection's service account
+## Task 2: Grant IAM permissions to the connection's service account and your own account
 In this task, you grant the Cloud Resource connection's service account IAM permissions, through a role, to enable it access the Vertex AI services.
 
 1. In the Google Cloud console, on the **Navigation menu**, click **IAM & Admin**.
@@ -46,6 +47,7 @@ In this task, you grant the Cloud Resource connection's service account IAM perm
 ![Add IAM](./images/add_iam.png)
 
 5. Click **Save**. The result is the service account ID now includes the Vertex AI User role.
+6. Grant yourself the **BigQuery Admin** role and save.
 
 ## Task 3: Create the dataset and object table in BigQuery for movie poster images
 
@@ -57,7 +59,7 @@ The dataset of movie poster images used in this tutorial are stored in a public 
 You will create a dataset to store database objects, including tables and models, used in this tutorial.
 
 1. In the Google Cloud console, go to **BigQuery**.
-2. In the **Explorer** panel, next to your project name, select **View actions**, and then select **Create dataset**.
+2. In the **Explorer** panel, next to your project name, select the 3 dots, and then select **Create dataset**.
 3. In the **Create dataset** pane, enter the following information:
 
 | Field | Value |
@@ -324,7 +326,7 @@ FROM
 
 The query uses the VECTOR_SEARCH function to find the nearest neighbor in the gemini_demo.imdb_movies_embeddings table for each row in the gemini_demo.movie_posters_results_embeddings table. The nearest neighbor is found using the cosine distance metric, which determines how similar two embeddings are.
 
-This query can be used to find the most similar movie in the IMDB dataset for each of the movies identified by Gemini Pro Vision in the movie posters. For example, you could use this query to find the closest match for the movie "Au Secours!" (identified by Gemini Pro Vision in one of the movie posters) in the IMDB public dataset, which references this movie by its English-language title, "Help!".
+This query can be used to find the most similar movie in the IMDB dataset for each of the movies identified by Gemini 2.0 Flash in the movie posters. For example, you could use this query to find the closest match for the movie "Au Secours!" (identified by Gemini 2.0 Flash in one of the movie posters) in the IMDB public dataset, which references this movie by its English-language title, "Help!".
 
 Create and run a new query to join some additional information on movie ratings provided in the IMDB public dataset.
 
