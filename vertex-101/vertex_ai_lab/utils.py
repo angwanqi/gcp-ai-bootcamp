@@ -71,7 +71,7 @@ class VertexConfig(BaseModel):
     IMAGE_URI: str
     TRAIN_COMPUTE: str = Field(default="e2-standard-4")
     DEPLOY_COMPUTE: str = Field(default="n1-standard-4")
-    BASE_IMAGE: str = Field(default="python:3.11")
+    BASE_IMAGE: str = Field(default="python:3.12")
     PIPELINE_NAME: str
     PIPELINE_ROOT: str
     BQ_DATASET: str = Field(default="tx")
