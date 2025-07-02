@@ -5,8 +5,8 @@ Welcome to the Google Cloud Hands-on Lab repository! This collection of labs cov
 ## 🚀 Getting Started
 To get started, clone this repository to your machine (e.g. Vertex Workbench). 
 ```bash
-    git clone https://github.com/angwanqi/cloud-ai-takeoff.git
-    cd cloud-ai-takeoff
+    git clone https://github.com/angwanqi/gcp-ai-bootcamp.git
+    cd gcp-ai-bootcamp
  ```
 ## 🔧 Status of the Labs
 | Lab Name | Status |
@@ -43,12 +43,15 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
     - [Serving Gemma 3 with vLLM on Cloud Run](cloudrun/deploy_vllm_cloudrun.md)
 8. Vertex AI Platform 101
     - [End to end training on Vertex platform](vertex-101)
+    - [AutoML Vision - Image Classification](automl)
 
 
 ## 🧱 Repository Structure
 ```bash
 .
 ├── alloydb-ai
+├── assignments
+├── automl
 ├── cloudrun
 ├── convo-agent
 ├── data-analytics
