@@ -39,7 +39,9 @@ gs://cloud-samples-data/ai-platform/flowers/tulips/13979098645_50b9eebc02_n.jpg,
 
 8. Select the **Select import files from Cloud Storage** and specify the Cloud Storage URI of the CSV file with the image location and label data. For this lab, the CSV file is at ```gs://cloud-samples-data/ai-platform/flowers/flowers.csv```. Copy and paste the following into the "Import file path" field:
 
-```gs://cloud-samples-data/ai-platform/flowers/flowers.csv```
+```shell
+gs://cloud-samples-data/ai-platform/flowers/flowers.csv
+```
 
 ![select-import-file](./images/select-import-file.png)
 
