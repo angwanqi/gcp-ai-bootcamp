@@ -16,7 +16,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 | [LLM Tuning](llm-tuning) | ✅ Completed |
 | [Data Analytics Platform](data-analytics) | ✅ Completed |
 | [AI with AlloyDB](alloydb-ai) | ✅ Completed |
-| [Multi Agent Systems with ADK](agents) | ✅ Completed |
+| [Multi Agent Systems with ADK](adk) | ✅ Completed |
 | [AI Application on Cloud Run](cloudrun) | ✅ Completed |
 | [Vertex AI Platform 101](vertex-101) | ✅ Completed |
 
@@ -37,7 +37,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 5. AI with AlloyDB
     - [Vector Search with AlloyDB](alloydb-ai/vector_search_with_alloydb.md)
 6. Multi Agent Systems with Agent Development Kit (ADK)
-    - [ADK 101](https://github.com/analyticsrepo01/adk_training_002/blob/main/ADK_Training_main.ipynb) 
+    - [ADK Training](adk/ADK_Training.ipynb) 
 7. AI Application on Cloud Run
     - [Working with Gemma 3 locally](cloudrun/gemma3_4b_with_hugging_face.ipynb)
     - [Serving Gemma 3 with vLLM on Cloud Run](cloudrun/deploy_vllm_cloudrun.md)
@@ -49,6 +49,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 ## 🧱 Repository Structure
 ```bash
 .
+├── adk
 ├── alloydb-ai
 ├── assignments
 ├── automl
