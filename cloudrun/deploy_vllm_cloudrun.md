@@ -60,7 +60,7 @@ gcloud auth list
 4. **Switch Accounts (If Necessary):** If the active account isn't the one you intend to use for this Codelab, switch to the correct account using this command, replacing `<your_desired_account@example.com>` with your actual email:
 
 ```
-gcloud config set account <your_desired_account@example.com
+gcloud config set account <your_desired_account@example.com>
 ```
 
 5. **Confirm Your Project**: Next, let's verify that Cloud Shell is configured to use the correct Google Cloud Project. Run:
@@ -187,7 +187,7 @@ gcloud secrets versions access latest --secret=HF_TOKEN
 
 # Create an Image on Artifact Registry
 
-Duration: 5:00
+Duration: 10:00
 
 This step involves creating a Docker image that includes the model weights and a pre-installed vLLM.
 
@@ -208,15 +208,12 @@ Based on the [GPU best practices documentation](https://cloud.google.com/run/doc
 Create a file named **Dockerfile** and copy the contents below into it:
 
 ```
-FROM vllm/vllm-openai:latest
-
-ARG MODEL_NAME
+FROM vllm/vllm-openai:v0.9.2
 
 ENV HF_HOME=/model-cache
-ENV MODEL_NAME=${MODEL_NAME}
 
 RUN --mount=type=secret,id=HF_TOKEN HF_TOKEN=$(cat /run/secrets/HF_TOKEN) \
-    huggingface-cli download ${MODEL_NAME}
+    huggingface-cli download google/gemma-3-1b-it
 
 ENV HF_HUB_OFFLINE=1
 
@@ -224,29 +221,50 @@ EXPOSE 8080
 
 ENTRYPOINT python3 -m vllm.entrypoints.openai.api_server \
     --port ${PORT:-8080} \
-    --model ${MODEL_NAME:-google/gemma-3-4b-it} \
+    --model ${MODEL_NAME:-google/gemma-3-1b-it} \
     --gpu-memory-utilization ${GPU_MEMORY_UTILIZATION:-0.80} \
     ${MAX_MODEL_LEN:+--max-model-len "$MAX_MODEL_LEN"}
-
 ```
 
 ## **Build and push the image**
 
-The following commands build a docker image, tag it appropriately, and push the image to the docker repository that was created on the Artifact Registry.
+We will use Cloud Build to build the container image. First we create a `cloudbuild.yaml` file to describe the build steps.
+
+Create a file named **cloudbuild.yaml** and copy the contents below into it:
 
 ```
-docker build \
-    --secret id=HF_TOKEN,src=<(gcloud secrets versions access latest --secret=HF_TOKEN) \
-    --build-arg MODEL_NAME=${MODEL_NAME} \
-    -t ${SERVICE_NAME} .
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: build
+  entrypoint: 'bash'
+  secretEnv: ['HF_TOKEN']
+  args: 
+    - -c
+    - |
+        SECRET_TOKEN="$$HF_TOKEN" docker buildx build --tag=${_IMAGE} --secret id=HF_TOKEN .
 
-docker tag ${SERVICE_NAME} ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO_NAME}/${SERVICE_NAME}
+availableSecrets:
+  secretManager:
+  - versionName: 'projects/${PROJECT_ID}/secrets/HF_TOKEN/versions/latest'
+    env: 'HF_TOKEN'
 
-gcloud auth configure-docker ${REGION}-docker.pkg.dev
+images: ["${_IMAGE}"]
 
-docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO_NAME}/${SERVICE_NAME}
+substitutions:  
+  _IMAGE: 'asia-southeast1-docker.pkg.dev/${PROJECT_ID}/vllm-gemma3-repo/gemma-3-1b-it-service'
+
+options:
+  dynamicSubstitutions: true
+  machineType: "E2_HIGHCPU_32"
+```
+
+Now, we trigger cloud build with the command below:
 
 ```
+gcloud builds submit --config=cloudbuild.yaml
+```
+
+The build takes around 8 minutes to complete.
 
 ---
 
@@ -302,7 +320,7 @@ curl -X POST http://localhost:8080/v1/completions \
 
 If you see a similar output as below:
 ```
-{"id":"cmpl-e96d05d2893d42939c1780d44233defa","object":"text_completion","created":1746870778,"model":"google/gemma-3-1b-it","choices":[{"index":0,"text":"100% managed Kubernetes service. It's a great option for many use cases.\n\nHere's a breakdown of key features and considerations:\n\n* **Managed Kubernetes:**  This means Google handles the underlying infrastructure, including scaling, patching, and maintenance.  You don't need to worry about managing Kubernetes clusters.\n* **Serverless:**  You only pay for the compute time your application actually uses.  No charges when your code isn't running.\n* **Scalability:**  Cloud Run automatically scales your application based on demand. You can easily scale up or down to handle fluctuating traffic.\n*","logprobs":null,"finish_reason":"length","stop_reason":null,"prompt_logprobs":null}],"usage":{"prompt_tokens":6,"total_tokens":134,"completion_tokens":128,"prompt_tokens_details":null}}
+{"id":"cmpl-211c62c396b847ad9c1021f4bf6b3cac","object":"text_completion","created":1755356393,"model":"google/gemma-3-1b-it","choices":[{"index":0,"text":"\n*   **Serverless compute service** from Google Cloud Platform (GCP)\n*   **Free to use**\n*   **Highly scalable**\n*   **Pay-as-you-go**\n\nHere's a breakdown of its key features:\n\n* **Serverless:** You don't manage servers, just code.\n* **Automatic Scaling:** Google automatically scales your application based on demand.\n* **Pay-as-you-go:** You only pay for the compute time you actually use.\n\n**Key Components:**\n\n*   **Container Images:** You deploy your application as a container image","logprobs":null,"finish_reason":"length","stop_reason":null,"prompt_logprobs":null}],"usage":{"prompt_tokens":6,"total_tokens":134,"completion_tokens":128,"prompt_tokens_details":null},"kv_transfer_params":null}
 ```
 
 ---
