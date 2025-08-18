@@ -1,4 +1,4 @@
-google.adk
+google-adk
 google-genai
 pydantic
 google-cloud-aiplatform
