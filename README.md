@@ -34,6 +34,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 4. Data Analytics Platform
     - [Predict Visitor Purchases with BigQuery Machine Learning](data-analytics/bigquery-ml)
     - [Analyzing Large Datasets in BigQuery](data-analytics/bigquery)
+    - [Analyzing Movie Posters in BigQuery with Remote Models](assignments/bq-remote-models.md)
 5. AI with AlloyDB
     - [Vector Search with AlloyDB](alloydb-ai/vector_search_with_alloydb.md)
 6. Multi Agent Systems with Agent Development Kit (ADK)
@@ -44,6 +45,9 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 8. Vertex AI Platform 101
     - [End to end training on Vertex platform](vertex-101)
     - [AutoML Vision - Image Classification](automl)
+9. Developer-focused Tools
+    - [Gemini CLI](https://codelabs.developers.google.com/gemini-cli-hands-on?hl=en#0)
+    - [Firebase Studio App Prototyping](https://firebase.google.com/codelabs/firebase-studio-intro?hl=en#0)
 
 
 ## 🧱 Repository Structure
