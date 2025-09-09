@@ -4,7 +4,6 @@
 
 # Introduction
 
-)
 Large Language Models (LLMs) are changing how we build smart applications. But getting these powerful models ready for real-world use can be tricky. They need a lot of computing power, especially graphics cards (GPUs), and smart ways to handle many requests at once. Plus, you want to keep costs down and your application running smoothly without delays.
 
 This Codelab will show you how to tackle these challenges\! We'll use two key tools:
