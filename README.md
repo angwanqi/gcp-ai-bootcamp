@@ -48,6 +48,7 @@ To get started, clone this repository to your machine (e.g. Vertex Workbench).
 9. Developer-focused Tools
     - [Gemini CLI](https://codelabs.developers.google.com/gemini-cli-hands-on?hl=en#0)
     - [Firebase Studio App Prototyping](https://firebase.google.com/codelabs/firebase-studio-intro?hl=en#0)
+    - [MCP Server on Cloud Run](https://codelabs.developers.google.com/codelabs/cloud-run/how-to-deploy-a-secure-mcp-server-on-cloud-run?hl=en#0)
 
 
 ## 🧱 Repository Structure
