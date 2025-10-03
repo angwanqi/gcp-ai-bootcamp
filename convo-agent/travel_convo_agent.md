@@ -22,17 +22,88 @@ https://conversational-agents.cloud.google.com/projects/<PROJECT_ID>/prebuilt
 
 - For the settings, give your Agent a name **(e.g. John Travel)**
 - Leave everything else as default and click on **Create**
-![Pre-built Agent Settings](./images/prebuilt_agent_settings.png)
+<img src="./images/prebuilt_agent_settings.png" width="55%">
 
 - Next, in the left panel click on **Tools**
 - Click into **places_search** tool.
-![Tools Page](./images/tools_page.png)
+<img src="./images/tools_page.png" width="75%">
+
+<br><br>
 
 - Scroll down to **Schema**
-- Under Server URL, replace the URL with:
+
+In line 8, we need to replace the server URL with an **active webhook**
+- Paste the link in a new tab to deploy webhooks using the prebuilt tool installer
 ```bash
-https://travel-places-search-288715243473.us-central1.run.app
+https://cloud.google.com/dialogflow/cx/docs/concept/playbook/prebuilt/travel#tool-setup
 ```
+
+<br><br>
+
+- Click on the '+' to expand instructions
+<img src="https://github.com/user-attachments/assets/2122cd9d-d6ca-412c-a303-8684537b45f8" width="55%">
+
+<br><br>
+
+- Click on the "prebuilt tool installer" to download installer.zip
+<img src="https://github.com/user-attachments/assets/a35cea88-fd1b-4638-8fb4-e3825d3128b1" width="55%">
+
+<br><br>
+
+- Navigate to the local directory where you downloaded installer.zip
+- Unzip installer.zip
+- Go to GCP console
+```
+https://console.cloud.google.com/
+```
+
+- Ensure that the user running the `installer.py` script has the following minimum
+permissions in GCP Console > IAM & Admin > your-project-number@developer.gserviceaccount.com > Click on **Pencil icon** to Edit Principal
+```
+https://pantheon.corp.google.com/iam-admin/iam?project=<YOUR_PROJECT_ID>
+```
+- Add the following roles
+
+<img src="https://github.com/user-attachments/assets/01191c18-7d8c-4ff8-b738-7441957e60b5" width="30%">
+
+<br><br>
+
+- Drag and drop the uzipped Installer folder into GCP Cloud Shell
+![Pre-built Agent Settings](https://github.com/user-attachments/assets/41e99e79-c297-4c83-bfc1-b7a91f5deb75)
+<img src="https://github.com/user-attachments/assets/b99cc787-3c22-439f-9118-b8b6233b4634" width="30%">
+
+<br><br>
+
+- Run in terminal
+```bash
+cd <Installer_folder_path>
+```
+- Create and Activate Virtual Environment (Linux):
+
+   | Environment | Command to Create Venv | Command to Activate Venv | 
+   | :--- | :--- | :--- | 
+   | Linux/macOS (Bash) | `python3 -m venv venv` | `source venv/bin/activate` | 
+   | Windows (Command Prompt) | `python -m venv venv` | `venv\Scripts\activate` | 
+   | Windows (PowerShell) | `python -m venv venv` | `venv\Scripts\Activate.ps1` |
+
+
+- Install Dependencies:
+```
+pip install -r requirements.txt
+```
+
+- Authenticate the gcloud CLI: This command ensures your local terminal has the necessary permissions to communicate with your Google Cloud Project. Follow the browser prompts to sign in.
+```
+gcloud auth application-default login
+```
+
+- To deploy webhooks for our prebuilt travel agent
+```
+python installer.py --project-id=<YOUR_PROJECT_ID> --prebuilt-id=travel
+```
+
+- Paste the webhooks into its respective tool's schema, under server URL 
+
 - Once done, click **Save**
 ![Replace URL](./images/replace_server_url.png)
 
