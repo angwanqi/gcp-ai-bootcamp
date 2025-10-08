@@ -31,6 +31,7 @@ Together, vLLM and Cloud Run offer a powerful, flexible, and cost-effective way 
 * Basic familiarity with Python, Docker, and the command line.
 
 | Note: New projects are granted 3 GPU quota by default, which is sufficient for this lab. If your use case require more, you need to request to increase the GPU quota by following the [guide](https://cloud.google.com/run/docs/configuring/services/gpu#request-quota). |
+| :---- |
 
 ---
 
