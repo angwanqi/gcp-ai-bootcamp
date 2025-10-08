@@ -12,7 +12,7 @@ This Codelab will show you how to tackle these challenges\! We'll use two key to
 
 2. **Google Cloud Run**: This is Google's serverless platform. It's fantastic for deploying applications because it handles all the scaling for you – from zero users to thousands, and back down again. Best of all, Cloud Run [now supports GPUs](https://cloud.google.com/run/docs/configuring/services/gpu), which are essential for LLMs\!
 
-Together, vLLM and Cloud Run offer a powerful, flexible, and cost-effective way to serve your LLMs. In this guide, you'll deploy an open model, making it available as a standard web API. 
+Together, vLLM and Cloud Run offer a powerful, flexible, and cost-effective way to serve your LLMs. In this guide, you'll deploy an open model, making it available as a standard web API.
 
 ## **What you'll learn:**
 
@@ -47,7 +47,7 @@ This Codelab assumes that you have already created a Google Cloud project with b
 
 2. **Enable Billing**: Ensure that billing is enabled for your selected Google Cloud project. You can learn how to check if billing is enabled on a project by following the instructions in the [Google Cloud Billing documentation](https://cloud.google.com/billing/docs/how-to/modify-project).
 
-##  **Configure Cloud Shell**
+## **Configure Cloud Shell**
 
 Now let's make sure you're set up correctly within Cloud Shell, a handy command-line interface directly within Google Cloud Console:
 
@@ -57,25 +57,25 @@ Now let's make sure you're set up correctly within Cloud Shell, a handy command-
 
 3. **Verify Your Account**: Once Cloud Shell has loaded, let's confirm you're using the correct Google Cloud account. Run the following command:
 
-```
+```bash
 gcloud auth list
 ```
 
 4. **Switch Accounts (If Necessary):** If the active account isn't the one you intend to use for this Codelab, switch to the correct account using this command, replacing `<your_desired_account@example.com>` with your actual email:
 
-```
+```bash
 gcloud config set account <your_desired_account@example.com>
 ```
 
 5. **Confirm Your Project**: Next, let's verify that Cloud Shell is configured to use the correct Google Cloud Project. Run:
 
-```
+```bash
 gcloud config list project
 ```
 
 6. **Set Your Project (If Necessary)**: If the `project` value is incorrect, set it to your desired project using the following command:
 
-```
+```bash
 gcloud config set project <your-desired-project-id>
 ```
 
@@ -83,7 +83,7 @@ gcloud config set project <your-desired-project-id>
 
 To use Google Cloud services like Cloud Run, you must first activate their respective APIs for your project. Running the commands below in the Cloud Shell terminal enables all the services that you will need for this lab:
 
-```
+```bash
 gcloud services enable run.googleapis.com 
 gcloud services enable cloudbuild.googleapis.com
 gcloud services enable secretmanager.googleapis.com
@@ -126,7 +126,7 @@ Before we proceed, it is a good practice to have all the configurations that you
 
 Here is the command to perform those steps:
 
-```
+```bash
 mkdir vllm-gemma3
 cd vllm-gemma3
 touch .env
@@ -137,7 +137,7 @@ touch .env
 
 Next, copy the variables listed below and paste them into the **.env file** you just created. Remember to replace the placeholder values inside the \<\> brackets with your specific information.
 
-```
+```bash
 PROJECT_ID=<your_project_id>
 REGION=asia-southeast1
 
@@ -153,13 +153,13 @@ SERVICE_ACC_EMAIL=${SERVICE_ACC_NAME}@${PROJECT_ID}.iam.gserviceaccount.com
 
 Once **.env file** is edited and saved, type this command to load those environment variables into the terminal session:
 
-```
+```bash
 source .env
 ```
 
 You can test whether the variables are successfully loaded or not by echoing one of the variables. For example:
 
-```
+```bash
 echo $SERVICE_NAME
 ```
 
@@ -167,9 +167,9 @@ If you get the same value as you assigned in the .env file, the variables are lo
 
 ## **Store a secret on Secret Manager**
 
-For any sensitive data, including access codes, credentials, and passwords, utilizing a secret manager is the recommended approach. 
+For any sensitive data, including access codes, credentials, and passwords, utilizing a secret manager is the recommended approach.
 
-Before using Gemma 3 models, you must first acknowledge the terms and conditions, as they are gated. Head over to [Hugging Face Hub](https://huggingface.co/google/gemma-3-1b-it) and acknowledge the terms and conditions. 
+Before using Gemma 3 models, you must first acknowledge the terms and conditions, as they are gated. Head over to [Hugging Face Hub](https://huggingface.co/google/gemma-3-1b-it) and acknowledge the terms and conditions.
 
 | Note: If you do not have a Hugging Face Access Token yet, create one [here](https://huggingface.co/settings/tokens). You will be needing it later. |
 | :---- |
@@ -183,7 +183,7 @@ Click the **Create Secret** button once you are done. You should now have the Hu
 
 You can test your access to the secret by executing the command below, which will retrieve it from Secret Manager:
 
-```
+```bash
 gcloud secrets versions access latest --secret=HF_TOKEN
 ```
 
@@ -199,7 +199,7 @@ This step involves creating a Docker image that includes the model weights and a
 
 Let’s create a Docker repository in Artifact Registry for pushing your built images. Run the following command in the terminal:
 
-```
+```bash
 gcloud artifacts repositories create ${AR_REPO_NAME} --repository-format docker --location ${REGION}
 ```
 
@@ -211,7 +211,7 @@ Based on the [GPU best practices documentation](https://cloud.google.com/run/doc
 
 Create a file named **Dockerfile** and copy the contents below into it:
 
-```
+```docker
 FROM vllm/vllm-openai:v0.9.2
 
 ENV HF_HOME=/model-cache
@@ -236,7 +236,7 @@ We will use Cloud Build to build the container image. First we create a `cloudbu
 
 Create a file named **cloudbuild.yaml** and copy the contents below into it:
 
-```
+```yaml
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: build
@@ -264,7 +264,7 @@ options:
 
 Now, we trigger cloud build with the command below:
 
-```
+```bash
 gcloud builds submit --config=cloudbuild.yaml
 ```
 
@@ -278,7 +278,7 @@ Duration: 5:00
 
 As the docker image is already pushed to the Artifact Registry, it can be deployed to Cloud Run with just one command:
 
-```
+```bash
 gcloud beta run deploy ${SERVICE_NAME} \
     --image=${IMAGE_NAME} \
     --cpu=8 \
@@ -291,7 +291,7 @@ gcloud beta run deploy ${SERVICE_NAME} \
 ```
 
 > [!NOTE]  
-> If you encounter an error that states **Deployment failed** with the following message, type **'Y'** to deploy with no zonal redundancy. 
+> If you encounter an error that states **Deployment failed** with the following message, type **'Y'** to deploy with no zonal redundancy.
 
 ![Deploy with no zonal redundancy](./images/no_zonal_redundancy.jpeg)
 ---
@@ -302,7 +302,7 @@ Duration: 5:00
 
 Run the following command in the terminal to create a proxy, so that you can access the service as it is running in localhost:
 
-```
+```bash
 gcloud run services proxy ${SERVICE_NAME} --region ${REGION}
 ```
 
@@ -311,7 +311,7 @@ In another terminal window, type this curl command in the terminal to test the c
 > [!NOTE]  
 > Your first request might experience a delay of 5 minutes or more due to a cold start on Cloud Run, as it scales to zero instances when idle. For production environments, consider setting a minimum number of instances greater than zero to eliminate these cold starts.
 
-```
+```bash
 curl -X POST http://localhost:8080/v1/completions \
 -H "Content-Type: application/json" \
 -d '{
@@ -323,7 +323,8 @@ curl -X POST http://localhost:8080/v1/completions \
 ```
 
 If you see a similar output as below:
-```
+
+```json
 {"id":"cmpl-211c62c396b847ad9c1021f4bf6b3cac","object":"text_completion","created":1755356393,"model":"google/gemma-3-1b-it","choices":[{"index":0,"text":"\n*   **Serverless compute service** from Google Cloud Platform (GCP)\n*   **Free to use**\n*   **Highly scalable**\n*   **Pay-as-you-go**\n\nHere's a breakdown of its key features:\n\n* **Serverless:** You don't manage servers, just code.\n* **Automatic Scaling:** Google automatically scales your application based on demand.\n* **Pay-as-you-go:** You only pay for the compute time you actually use.\n\n**Key Components:**\n\n*   **Container Images:** You deploy your application as a container image","logprobs":null,"finish_reason":"length","stop_reason":null,"prompt_logprobs":null}],"usage":{"prompt_tokens":6,"total_tokens":134,"completion_tokens":128,"prompt_tokens_details":null},"kv_transfer_params":null}
 ```
 
@@ -333,7 +334,7 @@ If you see a similar output as below:
 
 Duration: 1:00
 
-Congratulations for making it to the end of this Codelab. You just learned 
+Congratulations for making it to the end of this Codelab. You just learned
 
 * How to choose the right model size and variant for serving.  
 * How to set up vLLM to serve OpenAI-compatible API endpoints.  
