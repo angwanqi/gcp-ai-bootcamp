@@ -30,8 +30,7 @@ Together, vLLM and Cloud Run offer a powerful, flexible, and cost-effective way 
 * A Hugging Face Access Token (Create one [here](https://huggingface.co/settings/tokens) if you don’t have it yet)  
 * Basic familiarity with Python, Docker, and the command line.
 
-| Note: GPU features in Cloud Run are still in preview, you need to request to increase the GPU quota by following the [guide](https://cloud.google.com/run/docs/configuring/services/gpu#request-quota). |
-| :---- |
+| Note: New projects are granted 3 GPU quota by default, which is sufficient for this lab. If your use case require more, you need to request to increase the GPU quota by following the [guide](https://cloud.google.com/run/docs/configuring/services/gpu#request-quota). |
 
 ---
 
