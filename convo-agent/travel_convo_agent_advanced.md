@@ -5,11 +5,10 @@ In this lab, you'll deploy a pre-built low code generative AI agents using Googl
 
 With Conversational Agents, AI Agents can be created in just a few steps. For today's lab, we will be importing a Pre-Built Agent so that you can see how it works and play around with it
 ### Step 1: Go to Conversational Agents page
-- Open a new tab and copy the URL below (Replace ```<PROJECT_ID>``` with your Project ID):
-
-```
-https://conversational-agents.cloud.google.com/projects/<PROJECT_ID>/prebuilt
-```
+- Head over to the Conversational Agents console by clicking the following link: 
+https://conversational-agents.cloud.google.com
+- Select your project from the project menu
+- Next, select **Use prebuilt agents**
 
 - In the next page (shown below), select the **Travel** agent (You might have to scroll all the way down).
 > [!NOTE]  
@@ -31,89 +30,73 @@ https://conversational-agents.cloud.google.com/projects/<PROJECT_ID>/prebuilt
 <br><br>
 
 - Scroll down to **Schema**
+- In Line 8, you'll notice that the server URL is currently https://example.com
+- We need to replace the server URL with an **active API** which we will be deploying in the next section.
 
-In line 8, we need to replace the server URL with an **active webhook**
-- Paste the link in a new tab to deploy webhooks using the prebuilt tool installer
-```bash
-https://cloud.google.com/dialogflow/cx/docs/concept/playbook/prebuilt/travel#tool-setup
+### Step 2: Deploying our tools to Cloud Run Functions
+All the steps in this section can also be found at the the [official documentation](https://cloud.google.com/dialogflow/cx/docs/concept/playbook/prebuilt/travel#tool-setup))
+
+#### Download the installer.zip folder
+- In your Cloud Shell terminal, download the ```installer.zip``` folder by running the following command:
 ```
-
-<br><br>
-
-- Click on the '+' to expand instructions
-<img src="https://github.com/user-attachments/assets/2122cd9d-d6ca-412c-a303-8684537b45f8" width="55%">
-
-<br><br>
-
-- Click on the "prebuilt tool installer" to download installer.zip
-<img src="https://github.com/user-attachments/assets/a35cea88-fd1b-4638-8fb4-e3825d3128b1" width="55%">
-
-<br><br>
-
-- Navigate to the local directory where you downloaded installer.zip
-- Unzip installer.zip
-
-- Ensure that the user running the `installer.py` script has the following minimum
-permissions in GCP Console > IAM & Admin > your-project-number@developer.gserviceaccount.com > Click on **Pencil icon** to Edit Principal
+wget https://storage.googleapis.com/gassets-api-ai/prebuilt_agents/generative-prebuilt-agents/installer.zip
 ```
-https://console.cloud.google.com/iam-admin/iam?project=<PROJECT_ID>
+- Next, unzip the ```installer.zip``` folder
 ```
-- Add the following roles
-
-<img src="https://github.com/user-attachments/assets/01191c18-7d8c-4ff8-b738-7441957e60b5" width="50%">
-
-<br><br>
-
-- Drag and drop the uzipped Installer folder into GCP Cloud Shell
-![Pre-built Agent Settings](https://github.com/user-attachments/assets/41e99e79-c297-4c83-bfc1-b7a91f5deb75)
-<img src="https://github.com/user-attachments/assets/b99cc787-3c22-439f-9118-b8b6233b4634" width="40%">
-
-<br><br>
-
-- Run in terminal
-```bash
-cd <Installer_folder_path>
+unzip installer.zip -d installer/
 ```
-- Create and Activate Virtual Environment (Linux):
-
-   | Environment | Command to Create Venv | Command to Activate Venv | 
-   | :--- | :--- | :--- | 
-   | Linux/macOS (Bash) | `python3 -m venv venv` | `source venv/bin/activate` | 
-
-
-- Install Dependencies:
+#### Prepare your Cloud Shell environment
+- Change directory into the ```installer``` folder 
+```
+cd installer
+```
+- Create a virtual environment
+```
+python3 -m venv venv
+```
+- Activate the virtual environment
+```
+source venv/bin/activate
+```
+- Install the requirements
 ```
 pip install -r requirements.txt
+```
+- Run the following command to add the IAM roles to your user account:
+```
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/serviceusage.serviceUsageAdmin' && \
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/cloudfunctions.developer' && \
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/firebase.developAdmin' && \
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/storage.objectUser'
 ```
 
 - Authenticate the gcloud CLI: This command ensures your local terminal has the necessary permissions to communicate with your Google Cloud Project. Follow the browser prompts to sign in.
 ```
 gcloud auth application-default login
 ```
-
-- To deploy webhooks for our prebuilt travel agent
+#### Deploy the Cloud Run functions
+- To deploy Cloud Run functions for our prebuilt travel agent, replace ```<YOUR_PROJECT_ID>``` with your project ID and run the following command:
 ```
 python installer.py --project-id=<YOUR_PROJECT_ID> --prebuilt-id=travel
 ```
-
-- Paste the webhooks into its respective tool's schema, under server URL 
+- Once completed, the output will provide the URLs to your Cloud Run functions and you may replace the URL under each respective tool's schema. 
 
 - Once done, click **Save**
 ![Replace URL](./images/replace_server_url.png)
 
 - Repeat this for the other tools - remember to always click **Save** after you edit!
-  
-| Tool Name         | URL |
-| :---------------- | :------ |
-| places_search     | https://travel-places-search-288715243473.us-central1.run.app    |
-| hotel_booking     | https://travel-book-hotel-288715243473.us-central1.run.app       |
-| hotel_search      | https://travel-places-search-288715243473.us-central1.run.app    |
-| get_user_profile  | https://travel-get-user-profile-288715243473.us-central1.run.app |
 
 - Once you're done, you are ready to test your travel agent! 
 - Head back to Playbooks and select **Travel Steering**
 - Click on the **Chat** icon at the top to toggle open the simulator
 ![Toggle open chat](./images/toggle_chat.png)
+
+### Troubleshooting
+#### Check if your Cloud Run functions is authenticated
+TODO
+
+#### Check if Places API and Places API (New) is enabled
+TODO
 
 ### Ask away!
 You can ask for recommendations, more information about certain places and also try to get it to book a hotel for you (of course it'll be a simulated booking, not an actual one!)
