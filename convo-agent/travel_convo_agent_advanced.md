@@ -62,22 +62,38 @@ source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-- Run the following command to add the IAM roles to your user account:
+- Set PROJECT_ID, PROJECT_NUMBER and Compute Service Account directly from the gcloud config:
 ```
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/serviceusage.serviceUsageAdmin' && \
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/cloudfunctions.developer' && \
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/firebase.developAdmin' && \
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=user:$(gcloud config get-value account) --role='roles/storage.objectUser'
+export PROJECT_ID=$(gcloud config get-value project) && \
+export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)') && \
+export COMPUTE_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
 ```
-
 - Authenticate the gcloud CLI: This command ensures your local terminal has the necessary permissions to communicate with your Google Cloud Project. Follow the browser prompts to sign in.
 ```
 gcloud auth application-default login
 ```
+- Enable Google Maps Places API
+```
+gcloud services enable places-backend.googleapis.com
+```
+- Run the following command to add the IAM roles to your user account:
+```
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="user:$(gcloud config get-value account)" --role='roles/iam.serviceAccountAdmin' && \
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="user:$(gcloud config get-value account)" --role='roles/logging.viewer'
+```
+- Run the following command to grant the Compute SA all the necessary deployment permissions:
+```
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$COMPUTE_SA" --role='roles/artifactregistry.writer' && \
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$COMPUTE_SA" --role='roles/cloudfunctions.admin' && \
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$COMPUTE_SA" --role='roles/run.admin' && \
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$COMPUTE_SA" --role='roles/logging.logWriter' && \
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$COMPUTE_SA" --role='roles/storage.objectViewer' && \
+gcloud projects add-iam-policy-binding $PROJECT_ID --member="serviceAccount:$COMPUTE_SA" --role='roles/storage.objectAdmin'
+```
 #### Deploy the Cloud Run functions
 - To deploy Cloud Run functions for our prebuilt travel agent, replace ```<YOUR_PROJECT_ID>``` with your project ID and run the following command:
 ```
-python installer.py --project-id=<YOUR_PROJECT_ID> --prebuilt-id=travel
+python installer.py --project-id=$PROJECT_ID --prebuilt-id=travel
 ```
 - Once completed, the output will provide the URLs to your Cloud Run functions and you may replace the URL under each respective tool's schema. 
 
@@ -90,13 +106,6 @@ python installer.py --project-id=<YOUR_PROJECT_ID> --prebuilt-id=travel
 - Head back to Playbooks and select **Travel Steering**
 - Click on the **Chat** icon at the top to toggle open the simulator
 ![Toggle open chat](./images/toggle_chat.png)
-
-### Troubleshooting
-#### Check if your Cloud Run functions is authenticated
-TODO
-
-#### Check if Places API and Places API (New) is enabled
-TODO
 
 ### Ask away!
 You can ask for recommendations, more information about certain places and also try to get it to book a hotel for you (of course it'll be a simulated booking, not an actual one!)
